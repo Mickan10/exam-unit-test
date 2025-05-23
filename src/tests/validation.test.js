@@ -1,5 +1,5 @@
 import { isCartItem, isProduct } from "../validation.js"
-// Examples of a valid product and a valid cart item. You may use these when testing below.
+
 const exampleProduct = {
 	id: 1001,
 	name: 'Badanka',
@@ -12,25 +12,28 @@ const exampleCartObject = {
 	item: exampleProduct
 }
 
-// Group tests using "describe"
+//testfall
 describe('Validation', () => {
-
-	// Använd en "test" eller "it" (de är synonymer) för varje testfall
-	/* Exempel på syntax:
-	test('beskriv testfallet', () => {
-		// här skriver du testkoden
-		// avsluta alltid med "expect"
+	test ('ska ge true för en giltig produkt', () => {
+		expect(isProduct(exampleProduct)).toBe(true)
 	})
-	*/
 
+	test('ska ge false om produktens namn saknas', () => {
+		const invalidProduct = { id: 1002, price: 200 }
+		expect(isProduct(invalidProduct)).toBe(false)
+	})
 
-	// ---------------------------------------------
-	// Följande testfall ska du implementera. Det är tillåtet att använda Joi. Gör i så fall ett schema för varje sorts objekt du vill kunna validera. Du får även ändra texten och du t.ex. vill skriva på svenska i stället för engelska.
-	// (Ta bort dessa kommentarer när du är klar)
+	test('ska ge true för en giltig vara i kundvagnen', () => {
+		expect(isCartItem(exampleCartObject)).toBe(true)
+	})
 
-	// 1. it returns true for a valid cart object
-	// 2. it returns false for invalid cart objects
+	test('ska ge false om antal saknas i kundvagnen', () => {
+		const invalidCart = {
+			id: 2002,
+			item: exampleProduct 
+		}
+		expect(isCartItem(invalidCart)).toBe(false)
+	})
 
-	// 3. it returns true for a valid product
-	// 4. it returns false for invalid cart objects
 })
+
