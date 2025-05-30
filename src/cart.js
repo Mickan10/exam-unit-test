@@ -20,27 +20,39 @@ function getTotalCartValue() {
   }, 0)
 }
 
+// Lägger till ny produkt om den är giltig, annars ger fel
 function addToCart(newItem) {
   if (!isProduct(newItem)) {
+    if (!isProduct(newItem)) {
     throw new Error("Ogiltig produkt")
+    }
   }
+  // se om en produkt med samma id redan finns i kundvagnen, annars lägger till eller +1
+  const newId = idCounter;
+  const index = cart.findIndex((item) => item.id === newId);
 
-  const cartItem = { id: idCounter, amount: 1, item: newItem }
-  idCounter++
-  cart.push(cartItem)
+  if (index === -1) {
+    const cartItem = { id: idCounter, amount: 1, item: newItem };
+    idCounter++;
+    cart.push(cartItem);
+  } else {
+    cart[index].amount++;
+  }
 }
 
+//tar bort produkt från kundvagnen baserat på id
 function removeFromCart(itemId) {
   const initialLength = cart.length
   cart = cart.filter(item => item.id !== itemId)
   if (cart.length === initialLength) {
-    throw new Error("Produkten finns inte i kundkorgen")
-  }
+  throw new Error("Produkten finns inte i kundvagnen")
 }
 
+}
+//kollar om prdukt finns och antal är ett nummer
 function editCart(itemId, newValues) {
   const item = cart.find(i => i.id === itemId)
-  if (!item) throw new Error("Kundkorgsprodukt hittades inte")
+  if (!item) throw new Error("Kundvagnsprodukt hittades inte")
   if (typeof newValues.amount !== 'number') {
     throw new Error("Ogiltigt antal")
   }

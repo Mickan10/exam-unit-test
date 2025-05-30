@@ -47,25 +47,25 @@ describe('Cart', () => {
   })
 
   // testfall för felhantering
-  test('addToCart kastar fel vid ogiltig produkt (saknar namn)', () => {
+  test('addToCart ger fel vid ogiltig produkt (saknar namn)', () => {
     expect(() => {
       addToCart({ id: 2001, price: 50 })
     }).toThrow("Ogiltig produkt")
   })
 
-  test('addToCart kastar fel vid ogiltig produkt (fel typ på pris)', () => {
+  test('addToCart ger fel vid ogiltig produkt (fel typ på pris)', () => {
     expect(() => {
       addToCart({ id: 2002, name: "Fisk", price: "gratis" })
     }).toThrow("Ogiltig produkt")
   })
 
-  test('editCart kastar fel om ID inte finns', () => {
+  test('editCart ger fel om ID inte finns', () => {
     expect(() => {
       editCart(9999, { amount: 2 })
     }).toThrow("Kundvagnsprodukt hittades inte")
   })
 
-  test('editCart kastar fel om amount är ogiltigt (text)', () => {
+  test('editCart ger fel om amount är ogiltigt (text)', () => {
     addToCart({ id: 1008, name: "Simring", price: 90 })
     const item = getItem(0)
     expect(() => {
@@ -73,7 +73,7 @@ describe('Cart', () => {
     }).toThrow("Ogiltigt antal")
   })
 
-  test('removeFromCart kastar fel om produkten inte finns', () => {
+  test('removeFromCart ger fel om produkten inte finns', () => {
     expect(() => {
       removeFromCart(9999)
     }).toThrow("Produkten finns inte i kundvagnen")

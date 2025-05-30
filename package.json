@@ -4,8 +4,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
-    "test-details": "node --experimental-vm-modules node_modules/jest/bin/jest.js --verbose"
+    "test-details": "node --experimental-vm-modules node_modules/jest/bin/jest.js --verbose",
+    "test": "node --no-experimental-require-module --experimental-vm-modules node_modules/jest/bin/jest.js"  
   },
   "keywords": [],
   "author": "David Andersson",
